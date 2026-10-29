@@ -17,6 +17,7 @@ import java.awt.geom.Rectangle2D;//para curvar los bordes
 import java.awt.geom.RoundRectangle2D;
 import java.applet.AudioClip;
 import javax.sound.sampled.*;
+import javax.swing.ImageIcon;
 
 import java.io.File;
 
@@ -37,6 +38,8 @@ public class Cronometro extends JFrame {
     //Constructor
 
     public Cronometro(){
+
+        
         
         setTitle("Temporizador");
         setSize(330,65);
@@ -58,18 +61,42 @@ public class Cronometro extends JFrame {
         setUndecorated(true);//oculta la barra de título
         setShape(new RoundRectangle2D.Double(0,0, getWidth(), getHeight(),20,20));//curvar los bordes del cronómetro
        //setLayout(null);
-       
+        setIconImage(new ImageIcon(
+            getClass().getResource("resources/ICONO.png")
+        ).getImage());
 
-        Font fuenteDigital;
-        try{
+        //Font fuenteDigital;
+        try {
+
+            fuenteDigital = Font.createFont(
+                Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DS-DIGIB.TTF")
+            ).deriveFont(60f);
+
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(fuenteDigital);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       /* try{
+            fuenteDigital = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("fonts/DS-DIGIB.ttf")).deriveFont(Font.PLAIN, 60f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(fuenteDigital);
+            System.out.println(
+                getClass().getResource("fonts/DS-DIGIB.ttf") //Comprobar si la fuente fue incluida en el JAR
+            );
+        }catch(Exception e){
+            e.printStackTrace();
+            fuenteDigital = new Font("Arial", Font.PLAIN,60);
+        }*/
+        
+        /*try{
             fuenteDigital = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/DS-DIGIB.ttf")).deriveFont(Font.PLAIN,60f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(fuenteDigital);
         }catch(Exception e){
             e.printStackTrace();
             fuenteDigital = new Font("Arial",Font.BOLD,60);
-        }
-        
+        }*/
 
         lblMostrarReloj = new JLabel("00:00:00");
         lblMostrarReloj.setFont(fuenteDigital);
@@ -217,7 +244,7 @@ public class Cronometro extends JFrame {
                         ventanaNot.setVisible(true);
                         return;
                     }
-                    if(horas == 0 & minutos == 6 & segundos == 0){
+                    if(horas == 0 & minutos == 5 & segundos == 5){
                         cargarSonido();
                         reproducir();
                     }
@@ -270,14 +297,14 @@ public class Cronometro extends JFrame {
         minutos = 0;
         segundos = 0;
         lblMostrarReloj.setText("00:00:00");
-        try{
+        /*try{
             fuenteDigital = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/DS-DIGIB.ttf")).deriveFont(Font.PLAIN,60f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(fuenteDigital);
         }catch(Exception e){
             e.printStackTrace();
             fuenteDigital = new Font("Arial",Font.BOLD,60);
-        }
+        }*/
         lblMostrarReloj.setFont(fuenteDigital);
         btnPausa.setBackground(Color.ORANGE);
         btnPlay.setBackground(Color.GREEN);
@@ -319,4 +346,5 @@ public class Cronometro extends JFrame {
         if(clip!=null && clip.isRunning());
         clip.stop();
       }
+
 }

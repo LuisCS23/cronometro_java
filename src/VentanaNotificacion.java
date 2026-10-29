@@ -14,6 +14,7 @@ import javax.sound.sampled.*;
 
 import java.io.File;
 import java.io.IOException;
+import javax.swing.ImageIcon;
 
 public class VentanaNotificacion extends JFrame{
   private JLabel lblMensaje, lblMensaje2;
@@ -23,12 +24,16 @@ public class VentanaNotificacion extends JFrame{
   //Constructor
   public VentanaNotificacion(){
     setTitle("¡Alerta!");
-    setSize(1200,1000);
+    setSize(1200,900);
     setLocationRelativeTo(null);
     setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     setLayout(null);
     getContentPane().setBackground(Color.green);
     setAlwaysOnTop(true);
+
+    setIconImage(new ImageIcon(
+        getClass().getResource("resources/ICONO.png")
+    ).getImage());
 
     lblMensaje = new JLabel("!TIEMPO");
     lblMensaje.setFont(new Font("Arial",Font.BOLD,180));
@@ -42,7 +47,7 @@ public class VentanaNotificacion extends JFrame{
 
     btnVolver = new JButton("VOLVER");
     btnVolver.setFont(new Font("Arial", Font.ITALIC,40));
-    btnVolver.setBounds(470,800,200,60);
+    btnVolver.setBounds(470,750,200,60);
     btnVolver.setBackground(Color.white);
     add(btnVolver);
     //Llamamos a los métodos del sonido
@@ -65,6 +70,7 @@ public class VentanaNotificacion extends JFrame{
         //dispose();
       }
     });
+    getRootPane().setDefaultButton(btnVolver);
 
     addWindowListener(new java.awt.event.WindowAdapter() {
       @Override 

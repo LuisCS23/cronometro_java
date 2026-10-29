@@ -23,6 +23,10 @@ public class Configuracion extends JFrame{
         //Construimos la ventana
         setTitle("Temporizador DCTE 1.5");
         setSize(400,300);
+
+        setIconImage(new ImageIcon(
+            getClass().getResource("resources/ICONO.png")
+        ).getImage());
         
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
